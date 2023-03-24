@@ -12,11 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.devwobcis.hopechain.screens.HomeScreen
+import com.devwobcis.hopechain.ui.screens.HomeScreen
 import com.devwobcis.hopechain.ui.theme.DarkColors
 import com.devwobcis.hopechain.ui.theme.HopeChainTheme
 import com.devwobcis.hopechain.ui.theme.LightColors
+import com.devwobcis.hopechain.ui.theme.SetNavBarsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,7 @@ class MainActivity : ComponentActivity() {
             val colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors
             val navController = rememberNavController()
             HopeChainTheme {
+                SetNavBarsTheme()
 
                 Surface(
                     modifier = Modifier
