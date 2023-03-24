@@ -5,3 +5,14 @@ node_modules
 cache
 artifacts
 .env
+
+HopeChainApp/*.iml
+HopeChainApp/.gradle
+HopeChainApp/local.properties
+HopeChainApp/.idea
+HopeChainApp/.DS_Store
+HopeChainApp/build
+HopeChainApp/captures
+HopeChainApp/.externalNativeBuild
+HopeChainApp/.cxx
+HopeChainApp/local.properties
