@@ -1,0 +1,28 @@
+.container {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.wallet {
+  display: grid;
+  gap: var(--space-xs);
+  align-items: center;
+  grid-template-columns: 1fr auto auto;
+}
+
+.wallet .small {
+  font-size: var(--space-sm);
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-xs);
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  justify-items: flex-start;
+}
+
+/* .copy:hover span, */
+/* .copy:hover svg .copy:focus-within svg { */
+/* color: var(--text2); */
+/* } */

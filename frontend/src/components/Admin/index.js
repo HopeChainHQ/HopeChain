@@ -1,0 +1,145 @@
+import { useEffect, useState, Fragment } from "react"
+
+import DisasterArtifact from "../../contracts/DisasterDonate.json"
+import contractAddress from "../../contracts/contract-address.json"
+
+import "./Admin.css"
+
+import { createDisaster } from "../../utils"
+import { useContract, useContractWrite } from "../../hooks"
+
+const Admin = () => {
+	// The info of the token (i.e. It's Name and symbol)
+	const [disasterType, setDisasterType] = useState("")
+	const [severity, setSeverity] = useState("")
+	const [description, setDescription] = useState("")
+	const [affectedAreas, setAffectedAreas] = useState("")
+	const [affectedPeopleCount, setAffectedPeopleCount] = useState(0)
+	const [targetCollectionAmount, setTargetCollectionAmount] = useState(0)
+	const [reliefOrganizations, setReliefOrganizations] = useState([])
+
+	const { contract, initializeContract } = useContract()
+	const { updateMethod, setTransactionError } = useContractWrite()
+
+	useEffect(() => {
+		_initialize()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	const _initialize = async () => {
+		// This method initializes the dapp
+
+		// Fetching the Disasters are specific to this
+		// sample project, but you can reuse the same initialization pattern.
+		_intializeEthers()
+	}
+
+	const _intializeEthers = () => {
+		initializeContract({
+			address: contractAddress.DisasterDonate,
+			abi: DisasterArtifact.abi,
+		})
+	}
+
+	const handleAddDisaster = async (amount) => {
+		try {
+			await updateMethod(contract, createDisaster, {
+				severity: severity,
+				disasterType: disasterType,
+				description: description,
+				affectedAreas: affectedAreas,
+				affectedPeopleCount: affectedPeopleCount,
+				targetCollectionAmount: targetCollectionAmount,
+				reliefOrganizations: reliefOrganizations,
+			})
+		} catch (error) {
+			setTransactionError(error)
+		}
+	}
+
+	return (
+		<Fragment>
+			<main>Admin</main>
+			<form>
+				<label>
+					Disaster Type:
+					{/* 1. Earthquake
+                    2. Tsunami
+                    3. Hurricane/Cyclone
+                    4. Wildfire
+                    5. Flood
+                    6. Drought
+                    7. Oil Spillage
+                    8. Human Caused 
+                    9. Infectious Disease Outbreak */}
+					<select
+						value={disasterType}
+						onChange={(e) => setDisasterType(e.target.value)}>
+						<option value='earthquake'>Earthquake</option>
+						<option value='tsunami'>Tsunami</option>
+						<option value='hurricane'>Hurricane/Cyclone</option>
+						<option value='wildfire'>Wildfire</option>
+						<option value='flood'>Flood</option>
+						<option value='drought'>Drought</option>
+						<option value='oilSpillage'>Oil Spillage</option>
+						<option value='humanCaused'>Human Caused</option>
+						<option value='infectiousDiseaseOutbreak'>
+							Infectious Disease Outbreak
+						</option>
+					</select>
+				</label>
+				<label>
+					Severity:
+					<input
+						type='text'
+						value={severity}
+						onChange={(e) => setSeverity(e.target.value)}
+					/>
+				</label>
+				<label>
+					Description:
+					<input
+						type='text'
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+					/>
+				</label>
+				<label>
+					Affected Areas:
+					<input
+						type='text'
+						value={affectedAreas}
+						onChange={(e) => setAffectedAreas(e.target.value)}
+					/>
+				</label>
+				<label>
+					Affected People Count:
+					<input
+						type='number'
+						value={affectedPeopleCount}
+						onChange={(e) => setAffectedPeopleCount(e.target.value)}
+					/>
+				</label>
+				<label>
+					Target Collection Amount:
+					<input
+						type='number'
+						value={targetCollectionAmount}
+						onChange={(e) => setTargetCollectionAmount(e.target.value)}
+					/>
+				</label>
+				<label>
+					Relief Organizations:
+					<input
+						type='text'
+						value={reliefOrganizations}
+						onChange={(e) => setReliefOrganizations(e.target.value)}
+					/>
+				</label>
+				<input type='button' value='Add Disaster' onClick={handleAddDisaster} />
+			</form>
+		</Fragment>
+	)
+}
+
+export default Admin
