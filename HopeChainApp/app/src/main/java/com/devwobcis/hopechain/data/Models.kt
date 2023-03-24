@@ -5,3 +5,9 @@ data class EventEntity(
     var place: String,
     var description: String
 )
+
+data class OrgEntity(
+    var picUrl: String,
+    var place: String,
+    var description: String
+)

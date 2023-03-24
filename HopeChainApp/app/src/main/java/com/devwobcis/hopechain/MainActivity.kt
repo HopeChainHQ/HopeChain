@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.devwobcis.hopechain.ui.screens.ContributionScreen
 import com.devwobcis.hopechain.ui.screens.HomeScreen
 import com.devwobcis.hopechain.ui.theme.DarkColors
 import com.devwobcis.hopechain.ui.theme.HopeChainTheme
@@ -44,7 +45,12 @@ class MainActivity : ComponentActivity() {
                         startDestination = "home"
                     ) {
                         composable("home") {
-                            HomeScreen()
+                            HomeScreen(onEventListener = {
+                                navController.navigate("contribute")
+                            })
+                        }
+                        composable("contribute") {
+                            ContributionScreen()
                         }
                     }
                 }
