@@ -4,6 +4,7 @@ import ReactDOM from "react-dom"
 import Disaster from "./components/Disaster"
 import Admin from "./components/Admin"
 import Layout from "./components/Layout"
+import { ethers } from "ethers"
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
