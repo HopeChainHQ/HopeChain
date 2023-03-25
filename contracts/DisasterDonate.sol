@@ -38,6 +38,10 @@ contract DisasterDonate {
         // address[] topDonations;
     }
 
+    // struct EmergencyFund{
+    //     uint256 fundAmount;
+    // }
+
     // Organization struct
     struct Organization {
         string name;
@@ -55,6 +59,7 @@ contract DisasterDonate {
     address payable public owner;
 
     uint256 private disasterCount = 0;
+    uint256 private emergencyReliefFund = 0;
 
     constructor() {
         owner = payable(msg.sender);
@@ -143,13 +148,13 @@ contract DisasterDonate {
         organizations[organization].name = name;
     }
 
-    function donate(uint256 disasterId, address organization) public payable {
+    function donate(uint256 disasterId, address organization, string donorName) public payable {
         require(msg.value > 0, "Donation amount must be greater than 0");
         disasters[disasterId].donations[organization] += msg.value;
         organizations[organization].totalDonations += msg.value;
         disasters[disasterId].totalCollectedAmount += msg.value;
 
-        users[msg.sender] = User({username: "Anonymous"});
+        users[msg.sender] = User({username: donorName});
 
         // Update top donations
         // if (disasters[disasterId].topDonations.length < 10) {
@@ -211,6 +216,17 @@ contract DisasterDonate {
         require(msg.sender == owner, "Only owner can withdraw funds");
         owner.transfer(address(this).balance);
     }
+
+    function addToEmergencyReliefFund() public payable {
+        require(msg.value > 0, "Donation amount must be greater than 0");
+        emergencyReliefFund += msg.value;
+    }
+
+    function getEmergencyReliefFund() public view returns (uint256) {
+        return emergencyReliefFund;
+    }
+
+
 
     // function registerUser(bytes32 _username, bytes32 _password) public {
     //     require(!users[msg.sender].isRegistered, "User already registered");
