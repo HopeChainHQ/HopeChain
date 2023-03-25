@@ -89,17 +89,17 @@ fun ReportEventScreen(onNavigateSubmit: () -> Unit) {
                     }
                 }
 
-//                val ipfsClient = IPFS(MultiAddress("/dnsaddr/2NUjQGe04I8KMlEzpbbpGS1TFeW:07a3b4cb9ab3e7b40ae50ea0e1ccb587@filecoin.infura.io/tcp/5001/https"))
-//                val ipfsFile = NamedStreamable.FileWrapper(file)
-//
-//                var idx = 0
-//                ipfsClient.add(ipfsFile).forEach { node ->
-//                    Log.d("TAG", "ReportEventScreen: [$idx]: hash: ${node.hash.toBase58()}")
-//                    idx++
-//                }
+                val ipfsClient = IPFS(MultiAddress("/dnsaddr/2NUjQGe04I8KMlEzpbbpGS1TFeW:07a3b4cb9ab3e7b40ae50ea0e1ccb587@filecoin.infura.io/tcp/5001/https"))
+                val ipfsFile = NamedStreamable.FileWrapper(file)
 
-//                val upload = InfuraIPFS().add.file(file)
-//                Log.d("TAG", "ReportEventScreen: hash = ${upload.Hash}, name: ${upload.Name}")
+                var idx = 0
+                ipfsClient.add(ipfsFile).forEach { node ->
+                    Log.d("TAG", "ReportEventScreen: [$idx]: hash: ${node.hash.toBase58()}")
+                    idx++
+                }
+
+                val upload = InfuraIPFS().add.file(file)
+                Log.d("TAG", "ReportEventScreen: hash = ${upload.Hash}, name: ${upload.Name}")
                 delay(2000)
                 imageCid = ""
                 showDialog = false
