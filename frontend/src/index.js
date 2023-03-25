@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-// import { Dapp } from "./components/Dapp";
+// import { Dapp } from "./components/TokenTransfer/Dapp"
 import Disaster from "./components/Disaster"
+import Organizations from "./components/Organizations"
 import Admin from "./components/Admin"
 import Layout from "./components/Layout"
 
@@ -19,6 +20,7 @@ ReactDOM.render(
 			<Layout>
 				<Routes>
 					<Route path='/' element={<Disaster />} />
+					<Route path='/disaster/:id' element={<Organizations />} />
 					<Route path='/admin' element={<Admin />} />
 				</Routes>
 			</Layout>
