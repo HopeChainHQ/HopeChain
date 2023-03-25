@@ -34,5 +34,14 @@
     "ethers": "^5.0.0",
     "hardhat": "^2.8.2",
     "husky": "^4.2.5"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "err-code": "^3.0.1",
+    "ipfs-utils": "^9.0.14",
+    "it-last": "^2.0.1",
+    "merge-options": "^3.0.4",
+    "multiaddr": "^10.0.1",
+    "uint8arrays": "^4.0.3"
   }
 }
