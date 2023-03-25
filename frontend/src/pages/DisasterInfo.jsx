@@ -10,6 +10,7 @@ import {
 	WalletIcon,
 	PhoneIcon,
 } from "@heroicons/react/20/solid"
+import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import { useParams } from "react-router-dom"
 import DroughtImage from "../assets/images/Disasters/Drought.jpg"
 import FloodImage from "../assets/images/Disasters/Flood.jpg"
@@ -43,6 +44,11 @@ const DisasterInfo = () => {
 	const [organizations, setOrganizations] = useState()
 	const [organizationDatas, setOrganizationDatas] = useState()
 	const [donationAmount, setDonationAmount] = useState(0)
+	const [donationCurrency, setDonationCurrency] = useState("MATIC")
+	const [donationSuccess, setDonationSuccess] = useState(false)
+
+	const [showModal, setShowModal] = useState(false)
+	const [modalIndex, setModalIndex] = useState(0)
 
 	// The user's address ffand balance
 	const {
@@ -159,11 +165,23 @@ const DisasterInfo = () => {
 	}
 
 	const handleDonation = async (organization) => {
-		const donation = await updateMethod(contract, donate, {
+		// eslint-disable-next-line no-unused-vars
+		let donation = await updateMethod(contract, donate, {
 			disasterId: disasterId,
 			organization: organization,
 			amount: donationAmount,
 		})
+		if (!donation) {
+			setModalIndex(0)
+			setShowModal(false)
+			return
+		}
+		setDonationSuccess(true)
+		setTimeout(() => {
+			setModalIndex(0)
+			setShowModal(false)
+			setDonationSuccess(false)
+		}, 2000)
 	}
 
 	useEffect(() => {
@@ -282,6 +300,100 @@ const DisasterInfo = () => {
 						{!loading && !organizationDatas && (
 							<h1>No Organizations for the relief fund</h1>
 						)}
+						{!loading && showModal && (
+							<>
+								<div className='fixed z-10 inset-0 overflow-y-auto w-screen h-screen bg-black bg-opacity-50'>
+									<div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+										<div
+											className='fixed z-10 inset-0 transition-opacity'
+											onClick={() => setShowModal(false)}
+											aria-hidden='true'>
+											<div className='absolute inset-0 bg-gray-500 opacity-75'></div>
+										</div>
+										<span
+											className='hidden sm:inline-block sm:align-middle sm:h-screen'
+											aria-hidden='true'>
+											&#8203;
+										</span>
+										<div
+											className='inline-block relative z-20 align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full'
+											role='dialog'
+											aria-modal='true'
+											aria-labelledby='modal-headline'>
+											<div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
+												{donationSuccess && (
+													<div className='flex flex-col items-center justify-center'>
+														<CheckCircleIcon className='h-12 w-12 text-green-400' />
+														<h1 className='text-2xl font-bold text-gray-900 mt-4'>
+															Donation Successful
+														</h1>
+														<p className='text-lg text-gray-900 mt-4'>
+															Thank you for your donation!
+														</p>
+													</div>
+												)}
+												{!donationSuccess && (
+													<div className='sm:flex sm:items-start flex-col'>
+														<div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
+															<h3
+																className='text-lg leading-6 font-medium text-gray-900'
+																id='modal-headline'>
+																Donate to {organizationDatas[modalIndex].name}
+															</h3>
+														</div>
+														{/* Input for amount to donate */}
+														<div className='mt-3 text-center inline-flex ml-4 sm:text-left'>
+															<span
+																className='text-lg w-full leading-6 mt-3 text-gray-900'
+																id='modal-headline'>
+																Amount to donate
+															</span>
+															<input
+																type='number'
+																className='mt-1 focus:ring-Celadon focus:border-Celadon w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+																placeholder='Enter amount in INR'
+																value={donationAmount}
+																onChange={(e) =>
+																	setDonationAmount(e.target.value)
+																}
+															/>
+															<select
+																className='mt-1 ml-2 focus:ring-Celadon focus:border-Celadon w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+																value={donationCurrency}
+																onChange={(e) =>
+																	setDonationCurrency(e.target.value)
+																}>
+																<option value='ETH'>Etherium (ETH)</option>
+																<option value='MATIC'>Polygon (MATIC)</option>
+															</select>
+														</div>
+													</div>
+												)}
+											</div>
+											<div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
+												<button
+													type='button'
+													className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-Erin text-base font-medium text-black hover:bg-Erin focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-Erin sm:ml-3 sm:w-auto sm:text-sm'
+													onClick={async () => {
+														await handleDonation(organizations[modalIndex])
+													}}>
+													Donate
+												</button>
+												<button
+													type='button'
+													className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+													onClick={() => {
+														setModalIndex(0)
+														setShowModal(false)
+													}}>
+													Cancel
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</>
+						)}
 						{organizationDatas &&
 							organizationDatas.map((organizationData, index) => (
 								<>
@@ -327,7 +439,7 @@ const DisasterInfo = () => {
 										</div>
 										<div>
 											<div className='-mt-px flex divide-x divide-gray-200'>
-												<div className='flex w-0 flex-1'>
+												<div className='flex w-0 flex-1 cursor-pointer'>
 													<a
 														href={`mailto:support@ngo.com`}
 														className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900'>
@@ -338,7 +450,11 @@ const DisasterInfo = () => {
 														Email
 													</a>
 												</div>
-												<div className='-ml-px flex w-0 flex-1'>
+												<div
+													className='-ml-px flex w-0 flex-1 cursor-pointer'
+													onClick={() => {
+														setShowModal(!showModal)
+													}}>
 													<div className='relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900'>
 														<svg
 															version='1.1'
