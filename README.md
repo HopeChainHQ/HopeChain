@@ -1,89 +1,61 @@
-# Hardhat Hackathon Boilerplate
 
-This repository contains a sample project that you can use as the starting point
-for your Ethereum project. It's also a great fit for learning the basics of
-smart contract development.
+<a href="https://hack36.com"> <img src="https://i.postimg.cc/RFFWF4vg/built-at-hack.jpg" height=24px> </a>
 
-This project is intended to be used with the
-[Hardhat Beginners Tutorial](https://hardhat.org/tutorial), but you should be
-able to follow it by yourself by reading the README and exploring its
-`contracts`, `tests`, `scripts` and `frontend` directories.
+<h1 align="center">HopeChain - A decentralized donations platform for disaster management</h1>
 
-## Quick start
+## Introduction
+HopeChain is a community-driven decentralized donations platform that aims to tackle the world's most intimidating disasters. We have a web as well as a mobile application to enable users to donate funds to on-ground relief organizations. Users may choose to donate to particular relief organizations or a general emergency relief fund. 
 
-The first things you need to do are cloning this repository and installing its
-dependencies:
+Our application focuses on all 4 stages of the disaster cycle - mitigation, preparedness, response, and recovery. We use blockchain to ensure transparency in the entire process. The basic advantages of using HopeChain over traditional donation platforms are:
+  - Faster international transactions
+  - Increased Transparency
+  - Lower Transaction Costs
+  - Increased Security
+  
+Our Android application lets users do all the things that the web app does, and also lets users upload pictures of potential disasters which are verified by the team. These pictures are uploaded to IPFS to keep them secure and prove their authenticity.
 
-```sh
-git clone https://github.com/nomiclabs/hardhat-hackathon-boilerplate.git
-cd hardhat-hackathon-boilerplate
-npm install
-```
+We also reward our donors and with each donation they make, they get some HopeCoins which can be used for purchases with our e-commerce partners. 
 
-Once installed, let's run Hardhat's testing network:
 
-```sh
-npx hardhat node
-```
+## Demo Video Link:
+  <a href="https://youtu.be/dQw4w9WgXcQ">https://youtu.be/dQw4w9WgXcQ</a>
 
-Then, on a new terminal, go to the repository's root folder and run this to
-deploy your contract:
+## Presentation Link:
+  <a href="https://cutt.ly/Hack36_23_ppt"> PPT link here </a>
 
-```sh
-npx hardhat run scripts/deploy.js --network localhost
-```
 
-Finally, we can run the frontend with:
+## Technology Stack:
+  1. Languages
+     * Blockchain
+       - Solidity
+     * Web App
+        - React (Js, Html, Css)
+     * Tailwind CSS
+     * Android App
+        - Kotlin
+        - AndroidX
+        - Jetpack-Compose
+  2. Blockchains
+      * Polygon
+      * Etherium
+      * Payment support in any token
+  3) Smart Contract
+      * Hardhat - compiler, builder and deploy
+      * Alchemy - RPC API for deploying to polygon
+      * Remix - Quick testing and debugging smart contracts
+      * Metamask - Etherium wallet
 
-```sh
-cd frontend
-npm install
-npm start
-```
 
-> Note: There's [an issue in `ganache-core`](https://github.com/trufflesuite/ganache-core/issues/650) that can make the `npm install` step fail. 
->
-> If you see `npm ERR! code ENOLOCAL`, try running `npm ci` instead of `npm install`.
 
-Open [http://localhost:3000/](http://localhost:3000/) to see your Dapp. You will
-need to have [Metamask](https://metamask.io) installed and listening to
-`localhost 8545`.
+## Contributors:
 
-## User Guide
+Team Name: Devw/oBcis
 
-You can find detailed instructions on using this repository and many tips in [its documentation](https://hardhat.org/tutorial).
+* [Sanskar Omar](https://github.com/sanskaromar)
+* [Priyav Kaneria](https://github.com/PriyavKaneria)
+* [Shashank Verma](https://github.com/shank03)
+* [Shaurya Dugar](https://github.com/shauryaDugar)
 
-- [Project description (Token.sol)](https://hardhat.org/tutorial/4-contracts/)
-- [Setting up the environment](https://hardhat.org/tutorial/1-setup/)
-- [Testing with Hardhat, Mocha and Waffle](https://hardhat.org/tutorial/5-test/)
-- [Setting up Metamask](https://hardhat.org/tutorial/8-frontend/#setting-up-metamask)
-- [Hardhat's full documentation](https://hardhat.org/getting-started/)
 
-For a complete introduction to Hardhat, refer to [this guide](https://hardhat.org/getting-started/#overview).
-
-## What’s Included?
-
-Your environment will have everything you need to build a Dapp powered by Hardhat and React.
-
-- [Hardhat](https://hardhat.org/): An Ethereum development task runner and testing network.
-- [Mocha](https://mochajs.org/): A JavaScript test runner.
-- [Chai](https://www.chaijs.com/): A JavaScript assertion library.
-- [ethers.js](https://docs.ethers.io/ethers.js/html/): A JavaScript library for interacting with Ethereum.
-- [Waffle](https://github.com/EthWorks/Waffle/): To have Ethereum-specific Chai assertions/mathers.
-- [A sample frontend/Dapp](./frontend): A Dapp which uses [Create React App](https://github.com/facebook/create-react-app).
-
-## Troubleshooting
-
-- `Invalid nonce` errors: if you are seeing this error on the `npx hardhat node`
-  console, try resetting your Metamask account. This will reset the account's
-  transaction history and also the nonce. Open Metamask, click on your account
-  followed by `Settings > Advanced > Reset Account`.
-
-## Feedback, help and news
-
-We'd love to have your feedback on this tutorial. Feel free to reach us through
-this repository or [our Discord server](https://invite.gg/HardhatSupport).
-
-Also you can [follow us on Twitter](https://twitter.com/HardhatHQ).
-
-**Happy _buidling_!**
+### Made at:
+<a href="https://hack36.com"> <img src="https://i.postimg.cc/RFFWF4vg/built-at-hack.jpg" height=24px> </a>

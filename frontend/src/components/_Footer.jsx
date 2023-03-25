@@ -32,7 +32,12 @@ const _Footer = () => {
                   <HashLink smooth to="#">
                     HopeChain
                   </HashLink>
-                  <Footer.Link href="#">HopeCoin</Footer.Link>
+                  <Footer.Link
+                    href="https://giphy.com/embed/BOT7zVujxCj0oLYCeM"
+                    target="_blank"
+                  >
+                    HopeCoin
+                  </Footer.Link>
                 </Footer.LinkGroup>
               </div>
               <div>

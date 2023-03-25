@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from "react"
 import Nav from "../components/Nav"
-import { Accordion } from "flowbite-react"
+import { Accordion, Timeline, Button } from "flowbite-react"
 import Divider from "../components/Divider"
+import { HiArrowNarrowRight, HiCalendar } from "react-icons/hi"
+import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import {
 	LifebuoyIcon,
 	NewspaperIcon,
 	EnvelopeIcon,
 	PhoneIcon,
 } from "@heroicons/react/20/solid"
-import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import { useParams } from "react-router-dom"
 import DroughtImage from "../assets/images/Disasters/Drought.jpg"
 import FloodImage from "../assets/images/Disasters/Flood.jpg"
@@ -237,19 +238,19 @@ const DisasterInfo = () => {
 		{
 			name: "Emergency Support",
 			description:
-				"Consectetur vel non. Rerum ut consequatur nobis unde. Enim est quo corrupti consequatur.",
+				"Contact us if you need help with your account or have any questions.",
 			icon: PhoneIcon,
 		},
 		{
 			name: "Technical Support",
 			description:
-				"Quod possimus sit modi rerum exercitationem quaerat atque tenetur ullam.",
+				"For technical support, please email us at support@hopechain.xyz",
 			icon: LifebuoyIcon,
 		},
 		{
-			name: "Media Inquiries",
+			name: "Register Relief Organization",
 			description:
-				"Ratione et porro eligendi est sed ratione rerum itaque. Placeat accusantium impedit eum odit.",
+				"For getting in touch with us for registering your organization, please email us at neworg@hopechain.xyz",
 			icon: NewspaperIcon,
 		},
 	]
@@ -545,6 +546,64 @@ const DisasterInfo = () => {
 							))}
 					</ul>
 
+					<Divider text='Timeline' />
+
+					<Timeline className='my-4 md:my-8 mx-24'>
+						<Timeline.Item>
+							<Timeline.Point icon={HiCalendar} />
+							<Timeline.Content>
+								<Timeline.Time>28 February 2022</Timeline.Time>
+								<Timeline.Title>The Unfortunate Disaster</Timeline.Title>
+								<Timeline.Body>
+									The unfortunate disaster that happened in the year 2022, at
+									delhi. Atleast 500 people died in the disaster. The disaster
+									was caused by the earthquake.
+								</Timeline.Body>
+								<Button color='gray'>
+									Learn More
+									<HiArrowNarrowRight className='ml-2 h-3 w-3' />
+								</Button>
+							</Timeline.Content>
+						</Timeline.Item>
+						<Timeline.Item>
+							<Timeline.Point icon={HiCalendar} />
+							<Timeline.Content>
+								<Timeline.Time>1 March 2022</Timeline.Time>
+								<Timeline.Title>50% target fund was collected</Timeline.Title>
+								<Timeline.Body>
+									Through contributions from the people of world, we were able
+									to collect 60% of the target fund. We are still in need of
+									more funds to help the people of delhi.
+								</Timeline.Body>
+							</Timeline.Content>
+						</Timeline.Item>
+						<Timeline.Item>
+							<Timeline.Point icon={HiCalendar} />
+							<Timeline.Content>
+								<Timeline.Time>5 March 2022</Timeline.Time>
+								<Timeline.Title>
+									Rebuilding started in the affected areas
+								</Timeline.Title>
+								<Timeline.Body>
+									First phase of rebuilding started in the affected areas. The
+									people of delhi are very happy with the work done by the
+									government.
+								</Timeline.Body>
+							</Timeline.Content>
+						</Timeline.Item>
+						<Timeline.Item>
+							<Timeline.Point icon={HiCalendar} />
+							<Timeline.Content>
+								<Timeline.Time>6 March 2022</Timeline.Time>
+								<Timeline.Title>80% target fund was collected</Timeline.Title>
+								<Timeline.Body>
+									Through contributions from the people of world, we were able
+									to collect 80% of the target fund. We are still in need of
+									more funds to help the people of delhi.
+								</Timeline.Body>
+							</Timeline.Content>
+						</Timeline.Item>
+					</Timeline>
 					<div className='relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32'>
 						<img
 							src='https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply'
@@ -601,8 +660,9 @@ const DisasterInfo = () => {
 									Support center
 								</h2>
 								<p className='mt-6 text-lg leading-8 text-gray-300'>
-									We're here to help. If you have any questions, please contact
-									us.
+									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
+									qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
+									occaecat fugiat aliqua.
 								</p>
 							</div>
 							<div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8'>
