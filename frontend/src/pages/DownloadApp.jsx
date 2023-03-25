@@ -42,12 +42,14 @@ const DownloadApp = () => {
         <div className="px-6 py-24 -translate-y-10 mx-auto max-w-7xl sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
           <div className="max-w-2xl -translate-y-10 mx-auto lg:mx-0 lg:flex-auto">
             <h1 className="max-w-lg text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              A better way to ship your projects
+              {/* A better way to ship your projects */}A better world is just
+              one download away.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Esse id magna consectetur fugiat non dolor in ad laboris magna
-              laborum ea consequat. Nisi irure aliquip nisi adipisicing veniam
-              voluptate id. In veniam incididunt ex veniam adipisicing sit.
+              A world of change in your pocket. With just a few clicks, you can
+              make a real impact on issues you care about. Amplify your voice,
+              connect with like-minded individuals, and be a part of the
+              solution today.
             </p>
             <div className="flex items-center mt-10 gap-x-6">
               <a
