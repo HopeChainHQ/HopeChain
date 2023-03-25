@@ -207,7 +207,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://www.habitat.org/sites/default/files/styles/2_1_xsmall/public/2016-09/disaster-volunteers-rebuild-nepal-earthquake.jpg?itok=RuNSOUfL"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Rebuilding Lives with HopeChain"
@@ -221,7 +221,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://www.shutterstock.com/image-photo/smiling-student-girl-wearing-school-260nw-1959608329.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Empowering Dreams with HopeChain"
@@ -251,7 +251,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://www.lifesecure.com/wp-content/uploads/2019/03/STOP-5.png"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "A Beacon of Hope"
@@ -265,7 +265,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://www.financialexpress.com/wp-content/uploads/2019/04/farmer-distressed-1.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Rising Above the Storm with HopeChain"
@@ -279,7 +279,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://www.habitat.org/sites/default/files/styles/2_1_xsmall/public/2016-09/disaster-volunteers-rebuild-nepal-earthquake.jpg?itok=RuNSOUfL"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Rebuilding Homes and Communities with HopeChain"
@@ -293,7 +293,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://images.hindustantimes.com/img/2021/07/25/550x309/AFP_9G68UF_1627237522776_1627237546659.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Restoring Hope after a Crisis"
@@ -307,7 +307,7 @@ const AboutUs = () => {
 
             <Card
               horizontal={true}
-              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+              imgSrc="https://s.yimg.com/ny/api/res/1.2/MVPsldkAc44kzwUEjkTq6g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM2MA--/https://media.zenfs.com/en/euronews_uk_articles_973/dca34ede3eb208dc37db137a1406d9a0"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 "Hope in Action"
