@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MonetizationOn
-import androidx.compose.material.icons.outlined.MonetizationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -21,7 +20,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,8 +37,8 @@ class ContributionScreenViewModel : ViewModel() {
     val orgList = mutableStateListOf(
         OrgEntity(
             picUrl = "https://pbs.twimg.com/profile_images/1212968213023059968/hm8ifooA_400x400.jpg",
-            place = "Japan",
-            description = "Tsunami (2011)"
+            place = "Goonj",
+            description = "NGO, Delhi"
         ),
         OrgEntity(
             picUrl = "https://media.npr.org/assets/img/2015/08/28/57328261_h31510915_wide-db41bf5c8a6cdd01b18c0de23117826f89067943.jpg?s=800&c=15&f=webp",
@@ -95,12 +93,14 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                         strokeCap = StrokeCap.Round
                     )
 
-                    Row(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)) {
-                        Text(text = "$ 69.00", color = colorScheme.primary)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Text(text = "69.00 ETH", color = colorScheme.primary)
                         Spacer(modifier = Modifier.weight(1f))
-                        Text(text = "$ 100.00", color = colorScheme.primary)
+                        Text(text = "100.00 ETH", color = colorScheme.primary)
                     }
 
                     Text(modifier = Modifier.padding(16.dp), text = "Organizations", fontSize = 20.sp)
@@ -114,16 +114,6 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                         }
                     }
                 }
-            },
-            floatingActionButton = {
-                ExtendedFloatingActionButton(
-                    text = { Text(text = "Donate", fontSize = 15.sp, textAlign = TextAlign.Center) },
-                    icon = { Icon(imageVector = Icons.Outlined.MonetizationOn, contentDescription = "") },
-                    onClick = { },
-                    shape = RoundedCornerShape(24.dp),
-                    modifier = Modifier.padding(),
-                    containerColor = colorScheme.primary
-                )
             }
         )
     }
@@ -166,13 +156,13 @@ fun OrgCard(orgEntity: OrgEntity) {
             ) {
                 Text(text = orgEntity.place, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
                 Text(text = orgEntity.description, fontSize = 14.sp)
-                OutlinedButton(
+                Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = { }
                 ) {
                     Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = "")
                     Spacer(modifier = Modifier.padding(4.dp))
-                    Text(text = "Contribute")
+                    Text(text = "Donate")
                 }
             }
         }

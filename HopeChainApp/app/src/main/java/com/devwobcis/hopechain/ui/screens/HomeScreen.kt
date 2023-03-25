@@ -62,7 +62,11 @@ class HomeScreenViewModel : ViewModel() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(onEventListener: () -> Unit, viewModel: HomeScreenViewModel = hiltViewModel()) {
+fun HomeScreen(
+    onNavigateContributeListener: () -> Unit,
+    onNavigateReportEventListener: () -> Unit,
+    viewModel: HomeScreenViewModel = hiltViewModel()
+) {
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     val colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors
@@ -88,14 +92,14 @@ fun HomeScreen(onEventListener: () -> Unit, viewModel: HomeScreenViewModel = hil
             },
             content = {
                 Column(modifier = Modifier.padding(it)) {
-                    EventList(viewModel.eventList, onEventListener)
+                    EventList(viewModel.eventList, onNavigateContributeListener)
                 }
             },
             floatingActionButton = {
                 ExtendedFloatingActionButton(
                     text = { Text(text = "Report Event", fontSize = 15.sp, textAlign = TextAlign.Center) },
                     icon = { Icon(imageVector = Icons.Outlined.Warning, contentDescription = "") },
-                    onClick = { },
+                    onClick = { onNavigateReportEventListener() },
                     shape = RoundedCornerShape(24.dp),
                     modifier = Modifier.padding(),
                     containerColor = colorScheme.primary
@@ -106,19 +110,19 @@ fun HomeScreen(onEventListener: () -> Unit, viewModel: HomeScreenViewModel = hil
 }
 
 @Composable
-fun EventList(eventList: SnapshotStateList<EventEntity>, onEventListener: () -> Unit) {
+fun EventList(eventList: SnapshotStateList<EventEntity>, onNavigateContributeListener: () -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxHeight(),
         contentPadding = PaddingValues(bottom = 72.dp, start = 16.dp, end = 16.dp)
     ) {
         items(eventList.size) { idx ->
-            EventCard(eventList[idx], onEventListener)
+            EventCard(eventList[idx], onNavigateContributeListener)
         }
     }
 }
 
 @Composable
-fun EventCard(event: EventEntity, onEventListener: () -> Unit) {
+fun EventCard(event: EventEntity, onNavigateContributeListener: () -> Unit) {
     val context = LocalContext.current
     val picasso = remember { mutableStateOf(Picasso.Builder(context).build()) }
     Card(
@@ -143,7 +147,7 @@ fun EventCard(event: EventEntity, onEventListener: () -> Unit) {
                         .clip(RoundedCornerShape(16.dp))
                         .fillMaxWidth()
                         .heightIn(0.dp, 148.dp),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             }
 
@@ -156,7 +160,7 @@ fun EventCard(event: EventEntity, onEventListener: () -> Unit) {
                 Text(text = event.description, fontSize = 14.sp)
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { onEventListener() }
+                    onClick = { onNavigateContributeListener() }
                 ) {
                     Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = "")
                     Spacer(modifier = Modifier.padding(4.dp))
