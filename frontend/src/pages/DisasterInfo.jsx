@@ -492,7 +492,8 @@ const DisasterInfo = () => {
 												<div
 													className='-ml-px flex w-0 flex-1 cursor-pointer'
 													onClick={() => {
-														setShowModal(!showModal)
+														setModalIndex(index)
+														setShowModal(true)
 													}}>
 													<div className='relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900'>
 														<svg
