@@ -184,11 +184,11 @@ const AboutUs = () => {
               imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Noteworthy technology acquisitions 2021
+                Hope in the Face of Adversity
               </h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order.
+                A single mother recounts how HopeChain's reserve fund helped her
+                provide for her family during a natural disaster.
               </p>
             </Card>
             <Card
@@ -196,25 +196,127 @@ const AboutUs = () => {
               imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Noteworthy technology acquisitions 2021
+                "From Devastation to Recovery"
               </h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order.
+                {" "}
+                - A small business owner shares how HopeChain's financial aid
+                saved her livelihood when her shop was destroyed by a storm.
               </p>
             </Card>
+
             <Card
               horizontal={true}
               imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Noteworthy technology acquisitions 2021
+                "Rebuilding Lives with HopeChain"
               </h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order technology acquisitions
-                of 2021 so far, in reverse chronological ordertechnology
-                acquisitions of 2021 so far, in reverse chronological order.
+                {" "}
+                - A community leader describes how the app's reserve funds
+                helped his neighborhood recover from a devastating wildfire.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Empowering Dreams with HopeChain"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A student shares how the app's financial aid allowed her to
+                continue her education after her family lost everything in a
+                flood.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Finding Hope in the Midst of Chaos"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A volunteer tells the story of how HopeChain's reserve funds
+                helped her provide critical support to those in need after a
+                tornado struck her town.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "A Beacon of Hope"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A disaster relief worker shares how HopeChain's reserve fund
+                provided essential resources for those affected by a hurricane.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Rising Above the Storm with HopeChain"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A farmer tells the story of how the app's financial aid helped
+                her replant her crops after a severe drought.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Rebuilding Homes and Communities with HopeChain"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A construction worker shares how the app's reserve funds
+                helped his team rebuild homes destroyed by a flood.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Restoring Hope after a Crisis"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A survivor of a massive earthquake shares how HopeChain's
+                financial aid helped her family start anew.
+              </p>
+            </Card>
+
+            <Card
+              horizontal={true}
+              imgSrc="https://flowbite.com/docs/images/blog/image-4.jpg"
+            >
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                "Hope in Action"
+              </h5>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {" "}
+                - A first responder recounts how the app's reserve funds helped
+                her team provide critical aid to those affected by a natural
+                disaster.
               </p>
             </Card>
           </Carousel>
