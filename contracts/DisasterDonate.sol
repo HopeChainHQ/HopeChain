@@ -148,7 +148,11 @@ contract DisasterDonate {
         organizations[organization].name = name;
     }
 
-    function donate(uint256 disasterId, address organization, string donorName) public payable {
+    function donate(
+        uint256 disasterId,
+        address organization,
+        string memory donorName
+    ) public payable {
         require(msg.value > 0, "Donation amount must be greater than 0");
         disasters[disasterId].donations[organization] += msg.value;
         organizations[organization].totalDonations += msg.value;
@@ -225,8 +229,6 @@ contract DisasterDonate {
     function getEmergencyReliefFund() public view returns (uint256) {
         return emergencyReliefFund;
     }
-
-
 
     // function registerUser(bytes32 _username, bytes32 _password) public {
     //     require(!users[msg.sender].isRegistered, "User already registered");
