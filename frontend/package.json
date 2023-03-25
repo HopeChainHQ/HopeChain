@@ -13,6 +13,7 @@
     "any-signal": "^3.0.1",
     "debug": "^4.3.4",
     "err-code": "^3.0.1",
+    "ethers": "^5.0.0",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
     "ipfs-core-utils": "^0.18.0",
