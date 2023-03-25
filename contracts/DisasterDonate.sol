@@ -234,6 +234,10 @@ contract DisasterDonate {
         return users[donor].username;
     }
 
+    function deleteDisaster(uint256 disasterId) public {
+        require(disasterID<disasterCount, "disasterID is incorrect");
+        delete disasters[disasterId];
+    }
     // function registerUser(bytes32 _username, bytes32 _password) public {
     //     require(!users[msg.sender].isRegistered, "User already registered");
     //     users[msg.sender].username = _username;

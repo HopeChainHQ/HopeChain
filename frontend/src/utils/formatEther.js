@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+const ethers = require("ethers");
 
 export const weiToEther = (weiValue) => ethers.utils.formatEther(weiValue);
 export const etherToWei = (etherValue) => ethers.utils.parseEther(etherValue);

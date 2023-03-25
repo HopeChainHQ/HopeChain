@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ethers } from "ethers"
+const ethers = require("ethers")
 
 export const useContract = () => {
 	const { ethereum } = window
