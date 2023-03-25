@@ -4,9 +4,11 @@ import { HashLink } from "react-router-hash-link";
 import { Navbar, Button, Avatar, Dropdown } from "flowbite-react";
 import logo320 from "../assets/images/logo320.png";
 
-const Nav = ({ isHome }) => {
+const Nav = ({ location }) => {
   const [isLogged, setIsLogged] = useState(false);
-  const [isActive, setIsActive] = useState(isHome ? 1 : 4);
+  const [isActive, setIsActive] = useState(
+    location === "Home" ? 1 : location === "DownloadApp" ? 4 : 5
+  );
   const scrollWithOffset = (el) => {
     const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
     const yOffset = -80;
