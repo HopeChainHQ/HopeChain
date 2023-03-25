@@ -45,6 +45,7 @@ export const useWallet = (setCurrentNetworkId) => {
 				ethereum.removeListener("chainChanged", handleNetworkChange)
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return { selectedAddress, setSelectedAddress }

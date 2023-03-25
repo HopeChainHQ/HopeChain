@@ -5,6 +5,7 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001
 
 export const useContractWrite = () => {
 	// The ID about transactions being sent, and any possible error with them
+	// eslint-disable-next-line no-unused-vars
 	const [txBeingSent, setTxBeingSent] = React.useState()
 	const [transactionError, setTransactionError] = React.useState()
 

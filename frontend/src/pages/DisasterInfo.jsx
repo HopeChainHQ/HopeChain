@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from "react"
 import Nav from "../components/Nav"
-import { Progress, Accordion } from "flowbite-react"
+import { Accordion } from "flowbite-react"
 import Divider from "../components/Divider"
 import {
 	LifebuoyIcon,
 	NewspaperIcon,
 	EnvelopeIcon,
-	WalletIcon,
 	PhoneIcon,
 } from "@heroicons/react/20/solid"
 import { CheckCircleIcon } from "@heroicons/react/24/outline"
@@ -21,7 +20,7 @@ import contractAddress from "../contracts/contract-address.json"
 
 import {
 	donate,
-	// etherToWei,
+	getDonorName,
 	getDisaster,
 	getOrganization,
 	weiToEtherAtFixedDecimal,
@@ -40,6 +39,7 @@ const DisasterInfo = () => {
 	const { id: disasterId } = useParams()
 	// The info of the token (i.e. It's Name and symbol)
 	const [loading, setLoading] = useState(true)
+	const [donorName, setDonorName] = useState()
 	const [disasterData, setDisasterData] = useState()
 	const [organizations, setOrganizations] = useState()
 	const [organizationDatas, setOrganizationDatas] = useState()
@@ -129,6 +129,17 @@ const DisasterInfo = () => {
 		}
 	}
 
+	const _updateDonorName = async () => {
+		const tempdonorName = await readMethod(contract, getDonorName, {
+			donor: selectedAddress,
+		})
+		if (!tempdonorName) {
+			setLoading(false)
+			return
+		}
+		setDonorName(tempdonorName)
+	}
+
 	const _updateDisasters = async () => {
 		const disaster = await readMethod(contract, getDisaster, {
 			disasterId: disasterId,
@@ -138,7 +149,7 @@ const DisasterInfo = () => {
 			return
 		}
 		setDisasterData(disaster)
-		setOrganizations(disaster[7])
+		setOrganizations(disaster[8])
 	}
 
 	useEffect(() => {
@@ -166,26 +177,25 @@ const DisasterInfo = () => {
 
 	const handleDonation = async (organization) => {
 		// eslint-disable-next-line no-unused-vars
-		let donation = await updateMethod(contract, donate, {
+		await updateMethod(contract, donate, {
 			disasterId: disasterId,
 			organization: organization,
 			amount: donationAmount,
+			donorName: donorName,
 		})
-		if (!donation) {
-			setModalIndex(0)
-			setShowModal(false)
-			return
-		}
 		setDonationSuccess(true)
 		setTimeout(() => {
 			setModalIndex(0)
 			setShowModal(false)
 			setDonationSuccess(false)
+			_updateDisasters()
+			_updateOrganizationsData()
 		}, 2000)
 	}
 
 	useEffect(() => {
 		if (contract) {
+			_updateDonorName()
 			_updateDisasters()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -248,12 +258,12 @@ const DisasterInfo = () => {
 		switch (disaster) {
 			case "drought":
 				return DroughtImage
-			case "hurricane":
+			case "flood":
 				return FloodImage
 			case "earthquake":
 				return EarthImage
 			default:
-				return DroughtImage
+				return EarthImage
 		}
 	}
 
@@ -263,18 +273,31 @@ const DisasterInfo = () => {
 			{loading && <h1>Loading...</h1>}
 			{!loading && disasterData && disasterData.length !== 0 && (
 				<>
-					<img
-						src={handleImageSrc(disasterData[1])}
-						className='mt-[70px] h-[600px] w-full'
-						alt=''
-					/>
+					<div>
+						<img
+							src={handleImageSrc(disasterData[2])}
+							className='mt-[70px] h-[600px] w-full'
+							alt=''
+						/>
+						<div className='absolute top-20 right-5 bg-opacity-80 rounded-md bg-white p-4'>
+							{/* Type of disaster */}
+							<p className='text-black text-7xl uppercase'>
+								{disasterData[0] === "" ? "Disaster" : disasterData[0]}
+							</p>
+							{/* Severity */}
+							<p className='text-black text-5xl capitalize'>
+								Severity - {disasterData[1]}
+							</p>
+							<p className='text-black text-2xl'>{disasterData[4]}</p>
+						</div>
+					</div>
 					<div className='shadow-lg flex flex-col items-center justify-center p-6 rounded-full w-1/2 mx-auto bg-Celadon -translate-y-12 h-24'>
 						<p>
 							Achieved{" "}
 							<span className='text-xl font-bold text-Jet'>
 								{" "}
 								{Number(
-									weiToEtherAtFixedDecimal(disasterData[6].toString(), 3)
+									weiToEtherAtFixedDecimal(disasterData[7].toString(), 3)
 								) * 143996.41}{" "}
 								INR
 							</span>{" "}
@@ -282,7 +305,7 @@ const DisasterInfo = () => {
 							<span className='text-xl font-bold text-Jet'>
 								{" "}
 								{Number(
-									weiToEtherAtFixedDecimal(disasterData[5].toString(), 3)
+									weiToEtherAtFixedDecimal(disasterData[6].toString(), 3)
 								) * 143996.41}{" "}
 								INR
 							</span>
@@ -340,6 +363,20 @@ const DisasterInfo = () => {
 																id='modal-headline'>
 																Donate to {organizationDatas[modalIndex].name}
 															</h3>
+														</div>
+														<div className='mt-3 text-center inline-flex ml-4 sm:text-left'>
+															<span
+																className='text-lg w-full leading-6 mt-3 text-gray-900'
+																id='modal-headline'>
+																Donate by Name
+															</span>
+															<input
+																type='text'
+																className='mt-1 focus:ring-Celadon focus:border-Celadon w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+																placeholder='Enter name'
+																value={donorName}
+																onChange={(e) => setDonorName(e.target.value)}
+															/>
 														</div>
 														{/* Input for amount to donate */}
 														<div className='mt-3 text-center inline-flex ml-4 sm:text-left'>
@@ -422,6 +459,7 @@ const DisasterInfo = () => {
 													onClick={() =>
 														copyTextToClipboard(organizations[index])
 													}>
+													Current Donations -{" "}
 													{Number(
 														weiToEtherAtFixedDecimal(
 															organizationData.totalDonations,
@@ -563,9 +601,8 @@ const DisasterInfo = () => {
 									Support center
 								</h2>
 								<p className='mt-6 text-lg leading-8 text-gray-300'>
-									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-									qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-									occaecat fugiat aliqua.
+									We're here to help. If you have any questions, please contact
+									us.
 								</p>
 							</div>
 							<div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8'>

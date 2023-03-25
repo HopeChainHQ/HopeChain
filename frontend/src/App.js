@@ -2,9 +2,7 @@ import "./App.css"
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import DownloadApp from "./pages/DownloadApp"
-import Disaster from "./components/Disaster"
 import DisasterInfo from "./pages/DisasterInfo"
-import Organizations from "./components/Organizations"
 import Admin from "./components/Admin"
 
 function App() {

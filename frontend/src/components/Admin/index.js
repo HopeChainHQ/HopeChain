@@ -22,6 +22,7 @@ import { NoWalletDetected, ConnectWallet } from "../Wallet"
 const Admin = () => {
 	// The info of the token (i.e. It's Name and symbol)
 	const [disasterType, setDisasterType] = useState("")
+	const [name, setName] = useState("")
 	const [severity, setSeverity] = useState("")
 	const [description, setDescription] = useState("")
 	const [affectedAreas, setAffectedAreas] = useState("")
@@ -115,6 +116,7 @@ const Admin = () => {
 	const handleAddDisaster = async () => {
 		try {
 			await updateMethod(contract, createDisaster, {
+				disasterName: name,
 				severity: severity,
 				disasterType: disasterType,
 				description: description,
@@ -223,6 +225,14 @@ const Admin = () => {
 							Infectious Disease Outbreak
 						</option>
 					</select>
+				</label>
+				<label>
+					Name:
+					<input
+						type='text'
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
 				</label>
 				<label>
 					Severity:

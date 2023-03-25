@@ -58,45 +58,45 @@ const DisasterSlider = () => {
 		switch (disaster) {
 			case "drought":
 				return DroughtImage
-			case "hurricane":
+			case "flood":
 				return FloodImage
 			case "earthquake":
 				return EarthImage
 			default:
-				return DroughtImage
+				return EarthImage
 		}
 	}
 
 	return (
 		<>
-			<div className='h-[21rem] sm:h-[24rem] xl:h-[90vh] my-[0px] md:my-[72px]'>
+			<div className='h-[21rem] sm:h-[24rem] xl:h-[90vh] my-[0px] md:mt-[72px]'>
 				<Carousel slideInterval={2500}>
 					{disasters &&
 						disasters.map((disaster, index) => (
 							<div
 								key={index}
-								className='h-full w-full'
+								className='h-full w-full rounded-none'
 								onClick={() => {
-									navigator(`/disaster/${index}`)
+									navigator(`/disasterinfo/${index}`)
 								}}>
 								<img
 									className='w-full h-full'
-									src={handleImageSrc(disaster[1])}
+									src={handleImageSrc(disaster[2])}
 									alt={disaster[1]}
 								/>
 								<div className='absolute bottom-5 left-5 bg-opacity-80 rounded-md bg-white p-4'>
 									{/* Type of disaster */}
 									<p className='text-black text-7xl uppercase'>
-										{disaster[1] === "" ? "Earthquake" : disaster[1]}
+										{disaster[0] === "" ? "Disaster" : disaster[0]}
 									</p>
 									{/* Severity */}
 									<p className='text-black text-5xl capitalize'>
-										{disaster[0]}
+										Severity - {disaster[1]}
 									</p>
 									{/* Description */}
 									{/* <p className=''>{disaster[2]}</p> */}
 									{/* Affected areas */}
-									<p className='text-black text-2xl'>{disaster[3]}</p>
+									<p className='text-black text-2xl'>{disaster[4]}</p>
 									{/* <h5>{disaster[4].toString()}</h5>
 									<h6>{disaster[5].toString()}</h6>
 									<h7>{disaster[6].toString()}</h7>
