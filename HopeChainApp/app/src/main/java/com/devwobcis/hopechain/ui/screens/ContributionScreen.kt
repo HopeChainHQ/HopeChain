@@ -1,5 +1,6 @@
 package com.devwobcis.hopechain.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -8,10 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MonetizationOn
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,12 +24,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.devwobcis.hopechain.R
 import com.devwobcis.hopechain.data.OrgEntity
+import com.devwobcis.hopechain.ui.components.InputAmountDialog
+import com.devwobcis.hopechain.ui.components.ProgressDialog
 import com.devwobcis.hopechain.ui.theme.DarkColors
 import com.devwobcis.hopechain.ui.theme.HopeChainTheme
 import com.devwobcis.hopechain.ui.theme.LightColors
 import com.devwobcis.hopechain.ui.theme.SetNavBarsTheme
 import com.squareup.picasso3.Picasso
 import com.squareup.picasso3.compose.rememberPainter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ContributionScreenViewModel : ViewModel() {
     val orgList = mutableStateListOf(
@@ -41,19 +43,19 @@ class ContributionScreenViewModel : ViewModel() {
             description = "NGO, Delhi"
         ),
         OrgEntity(
-            picUrl = "https://media.npr.org/assets/img/2015/08/28/57328261_h31510915_wide-db41bf5c8a6cdd01b18c0de23117826f89067943.jpg?s=800&c=15&f=webp",
-            place = "USA",
-            description = "Hurricane Katrina (2005)"
+            picUrl = "https://images.squarespace-cdn.com/content/v1/54ad90ffe4b0cb1588d58ef6/1554635712041-XC1R20MR7ZYQ4KO44YV7/Action+Aid?format=1000w",
+            place = "ActionAid",
+            description = "Association, India"
         ),
         OrgEntity(
-            picUrl = "https://static.toiimg.com/thumb/msid-55071172,imgsize-199052,width-400,resizemode-4/55071172.jpg",
-            place = "India",
-            description = "Tsunami (2004)"
+            picUrl = "https://cfstatic.give.do/9d3726ee-dcf8-4d76-b028-99d1b3834eef.png",
+            place = "CARE",
+            description = "One of the top NGO, India"
         ),
         OrgEntity(
-            picUrl = "https://cdn.mos.cms.futurecdn.net/TxezD8yGmxQNL8tYaX8u2e-970-80.jpg.webp",
-            place = "Philippines",
-            description = "Mount Pinatubo Eruption (1991)"
+            picUrl = "https://seedsvo.org/wp-content/uploads/elementor/thumbs/SEEDS-FPCL-2023-01-q33mshufpi5f2ru2zgk42uo5mf39nptn05gwoos7ss.png",
+            place = "SEEDS India",
+            description = "Sustainable Environment and Ecological Development, Delhi"
         )
     )
 }
@@ -62,8 +64,14 @@ class ContributionScreenViewModel : ViewModel() {
 @Composable
 fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel()) {
 
+    val context = LocalContext.current
     val colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val scope = rememberCoroutineScope()
+
+    var fundProgress by remember { mutableStateOf(0.29f) }
+    val showAmountDialog = remember { mutableStateOf(false) }
+    val showProgressDialog = remember { mutableStateOf(false) }
 
     HopeChainTheme {
         SetNavBarsTheme()
@@ -80,6 +88,22 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                 )
             },
             content = {
+                if (showAmountDialog.value) {
+                    InputAmountDialog(showAmountDialog = showAmountDialog) { fl ->
+                        scope.launch {
+                            showProgressDialog.value = true
+                            delay(2000)
+                            fundProgress += (fl / 100f)
+                            showProgressDialog.value = false
+                            Toast.makeText(context, "Successfully donated !", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                if (showProgressDialog.value) {
+                    ProgressDialog(progressMsg = "Transacting")
+                }
+
                 Column(
                     modifier = Modifier
                         .padding(it)
@@ -89,7 +113,7 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
                             .height(24.dp),
-                        progress = 0.69f,
+                        progress = fundProgress,
                         strokeCap = StrokeCap.Round
                     )
 
@@ -98,7 +122,10 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
                     ) {
-                        Text(text = "69.00 ETH", color = colorScheme.primary)
+                        Text(
+                            text = "${String.format("%.2f", fundProgress * 100)} ETH",
+                            color = colorScheme.primary
+                        )
                         Spacer(modifier = Modifier.weight(1f))
                         Text(text = "100.00 ETH", color = colorScheme.primary)
                     }
@@ -110,7 +137,7 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
                         contentPadding = PaddingValues(bottom = 72.dp, start = 16.dp, end = 16.dp)
                     ) {
                         items(viewModel.orgList.size) { idx ->
-                            OrgCard(viewModel.orgList[idx])
+                            OrgCard(viewModel.orgList[idx], showAmountDialog)
                         }
                     }
                 }
@@ -120,7 +147,7 @@ fun ContributionScreen(viewModel: ContributionScreenViewModel = hiltViewModel())
 }
 
 @Composable
-fun OrgCard(orgEntity: OrgEntity) {
+fun OrgCard(orgEntity: OrgEntity, showAmountDialog: MutableState<Boolean>) {
     val context = LocalContext.current
     val picasso = remember { mutableStateOf(Picasso.Builder(context).build()) }
     Card(
@@ -158,7 +185,7 @@ fun OrgCard(orgEntity: OrgEntity) {
                 Text(text = orgEntity.description, fontSize = 14.sp)
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { }
+                    onClick = { showAmountDialog.value = true }
                 ) {
                     Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = "")
                     Spacer(modifier = Modifier.padding(4.dp))
