@@ -51,10 +51,10 @@ We also reward our donors and with each donation they make, they get some HopeCo
 
 Team Name: Devw/oBcis
 
-* [Sanskar Omar]()
-* [Priyav Kaneria]()
-* [Shashank Verma]()
-* [Shaurya Dugar]()
+* [Sanskar Omar](https://github.com/sanskaromar)
+* [Priyav Kaneria](https://github.com/PriyavKaneria)
+* [Shashank Verma](https://github.com/shank03)
+* [Shaurya Dugar](https://github.com/shauryaDugar)
 
 
 ### Made at:
