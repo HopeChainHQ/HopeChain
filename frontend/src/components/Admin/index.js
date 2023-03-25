@@ -5,7 +5,12 @@ import contractAddress from "../../contracts/contract-address.json"
 
 import "./Admin.css"
 
-import { createDisaster } from "../../utils"
+import {
+	createDisaster,
+	createOrganization,
+	addOrganizationToDisaster,
+	deleteDisaster,
+} from "../../utils"
 import {
 	useContract,
 	useContractWrite,
@@ -23,6 +28,11 @@ const Admin = () => {
 	const [affectedPeopleCount, setAffectedPeopleCount] = useState(0)
 	const [targetCollectionAmount, setTargetCollectionAmount] = useState(0)
 	const [reliefOrganizations, setReliefOrganizations] = useState([])
+
+	const [organizationName, setOrganizationName] = useState("")
+	const [organizationAddress, setOrganizationAddress] = useState("")
+
+	const [disasterId, setDisasterId] = useState(0)
 
 	// The user's address ffand balance
 	const {
@@ -52,6 +62,24 @@ const Admin = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedAddress])
 
+	const _initialize = async (userAddress) => {
+		// This method initializes the dapp
+
+		// We first store the user's address in the component's state
+		setSelectedAddress(userAddress)
+
+		// Fetching the token data and the user's balance are specific to this
+		// sample project, but you can reuse the same initialization pattern.
+		_intializeEthers()
+	}
+
+	const _intializeEthers = () => {
+		initializeContract({
+			address: contractAddress.DisasterDonate,
+			abi: DisasterArtifact.abi,
+		})
+	}
+
 	const _connectWallet = async () => {
 		// This method is run when the user clicks the Connect. It connects the
 		// dapp to the user's wallet, and initializes it.
@@ -60,10 +88,9 @@ const Admin = () => {
 		// It returns a promise that will resolve to the user's address.
 		try {
 			// This opens a Metamask wallet popup, requesting the user to connect to their wallets
-			const [selectedAddress] = await window.ethereum.sendAsync(
-				"eth_requestAccounts",
-				[]
-			)
+			const [selectedAddress] = await window.ethereum.request({
+				method: "eth_requestAccounts",
+			})
 
 			// Once we have the address, we can initialize the application.
 
@@ -85,25 +112,7 @@ const Admin = () => {
 		}
 	}
 
-	const _initialize = async (userAddress) => {
-		// This method initializes the dapp
-
-		// We first store the user's address in the component's state
-		setSelectedAddress(userAddress)
-
-		// Fetching the token data and the user's balance are specific to this
-		// sample project, but you can reuse the same initialization pattern.
-		_intializeEthers()
-	}
-
-	const _intializeEthers = () => {
-		initializeContract({
-			address: contractAddress.DisasterDonate,
-			abi: DisasterArtifact.abi,
-		})
-	}
-
-	const handleAddDisaster = async (amount) => {
+	const handleAddDisaster = async () => {
 		try {
 			await updateMethod(contract, createDisaster, {
 				severity: severity,
@@ -118,6 +127,39 @@ const Admin = () => {
 			setTransactionError(error)
 		}
 	}
+
+	const handleAddOrganization = async () => {
+		try {
+			await updateMethod(contract, createOrganization, {
+				name: organizationName,
+				organization: organizationAddress,
+			})
+		} catch (error) {
+			setTransactionError(error)
+		}
+	}
+
+	const handleAddOrganizationToDisaster = async () => {
+		try {
+			await updateMethod(contract, addOrganizationToDisaster, {
+				disasterId: disasterId,
+				organization: organizationAddress,
+			})
+		} catch (error) {
+			setTransactionError(error)
+		}
+	}
+
+	const handleDeleteDisaster = async () => {
+		try {
+			await updateMethod(contract, deleteDisaster, {
+				disasterId: disasterId,
+			})
+		} catch (error) {
+			setTransactionError(error)
+		}
+	}
+
 	const _resetState = () => {
 		// The user's address and balance
 		setSelectedAddress()
@@ -153,6 +195,7 @@ const Admin = () => {
 	return (
 		<Fragment>
 			<main>Admin - {selectedAddress}</main>
+			<h1>Add Disaster</h1>
 			<form>
 				<label>
 					Disaster Type:
@@ -230,6 +273,70 @@ const Admin = () => {
 					/>
 				</label>
 				<input type='button' value='Add Disaster' onClick={handleAddDisaster} />
+			</form>
+			<h1>Add Organization</h1>
+			<form>
+				<label>
+					Organization Name:
+					<input
+						type='text'
+						value={organizationName}
+						onChange={(e) => setOrganizationName(e.target.value)}
+					/>
+				</label>
+				<label>
+					Organization Address:
+					<input
+						type='text'
+						value={organizationAddress}
+						onChange={(e) => setOrganizationAddress(e.target.value)}
+					/>
+				</label>
+				<input
+					type='button'
+					value='Add Organization'
+					onClick={handleAddOrganization}
+				/>
+			</form>
+			<h1>Add Organization to Disaster</h1>
+			<form>
+				<label>
+					Disaster ID:
+					<input
+						type='number'
+						value={disasterId}
+						onChange={(e) => setDisasterId(e.target.value)}
+					/>
+				</label>
+				<label>
+					Organization Address:
+					<input
+						type='text'
+						value={organizationAddress}
+						onChange={(e) => setOrganizationAddress(e.target.value)}
+					/>
+				</label>
+				<input
+					type='button'
+					value='Add Organization to Disaster'
+					onClick={handleAddOrganizationToDisaster}
+				/>
+			</form>
+			<h1>Delete Disaster</h1>
+			<form>
+				<label>
+					Disaster ID:
+					<input
+						type='number'
+						value={disasterId}
+						onChange={(e) => setDisasterId(e.target.value)}
+					/>
+				</label>
+				<input
+					type='button'
+					value='Delete Disaster'
+					onClick={handleDeleteDisaster}
+				/>
 			</form>
 		</Fragment>
 	)

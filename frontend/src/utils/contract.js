@@ -68,3 +68,7 @@ export const addOrganizationToDisaster = async (
 ) => {
 	return await _contract.addOrganizationToDisaster(disasterId, organization)
 }
+
+export const deleteDisaster = async (_contract, { disasterId }) => {
+	return await _contract.deleteDisaster(disasterId)
+}
