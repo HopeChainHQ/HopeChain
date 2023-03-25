@@ -10,7 +10,7 @@ import Footer from "../components/_Footer";
 const Home = () => {
   return (
     <>
-      <Nav />
+      <Nav isHome={true} />
       <DisasterSlider />
       <Stats />
       <Quotes />

@@ -8,7 +8,7 @@ const DisasterSlider = () => {
   // let disasterImages = [];
   return (
     <>
-      <div className="h-[21rem] sm:h-[24rem] xl:h-[90vh] my-[72px]">
+      <div className="h-[21rem] sm:h-[24rem] xl:h-[90vh] my-[0px] md:my-[72px]">
         <Carousel slideInterval={2500}>
           <img src={DroughtImage} alt="Drought" />
           <img src={FloodImage} alt="Flood" />

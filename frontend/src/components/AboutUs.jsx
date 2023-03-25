@@ -5,7 +5,10 @@ const AboutUs = () => {
   return (
     <>
       <div className="p-4 m-4 bg-Mint">
-        <h5 className="px-4 pb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5
+          className="px-4 pb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+          id="about"
+        >
           MISSION
         </h5>
         <p className="px-8 font-normal text-gray-700 dark:text-gray-400">
@@ -165,7 +168,7 @@ const AboutUs = () => {
         </p>
       </div>
 
-      <div className="p-4 m-4 bg-Mint">
+      <div className="p-4 m-4 bg-Mint" id="impact">
         <h5 className="px-4 pb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
           IMPACT STORIES
         </h5>
