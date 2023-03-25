@@ -149,10 +149,7 @@ contract DisasterDonate {
         organizations[organization].totalDonations += msg.value;
         disasters[disasterId].totalCollectedAmount += msg.value;
 
-        bytes memory username = bytes(users[msg.sender]);
-        if (username.length == 0) {
-            users[msg.sender] = "Anonymous";
-        }
+        users[msg.sender] = User({username: "Anonymous"});
 
         // Update top donations
         // if (disasters[disasterId].topDonations.length < 10) {
