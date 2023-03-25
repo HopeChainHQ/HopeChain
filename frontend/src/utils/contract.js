@@ -1,4 +1,4 @@
-import { weiToEtherAtFixedDecimal } from "./"
+import { etherToWei, weiToEtherAtFixedDecimal } from "./"
 import { TOKEN_DECIMAL_UNIT } from "../constants"
 
 export const getContractData = async (_contract) => {
@@ -9,12 +9,30 @@ export const getContractData = async (_contract) => {
 }
 
 export const getAllDisasterData = async (_contract) => {
-	const disasterData = await _contract.getAllDisasterData()
+	const allDisasterData = await _contract.getAllDisasterData()
+	return allDisasterData
+}
+
+export const getDisaster = async (_contract, { disasterId }) => {
+	const disasterData = await _contract.getDisaster(disasterId)
 	return disasterData
 }
 
-export const donate = async (_contract, { options }) => {
-	return await _contract.donate(options)
+export const getOrganization = async (_contract, { organization }) => {
+	const organizationData = await _contract.getOrganization(organization)
+	return organizationData
+}
+
+export const donate = async (
+	_contract,
+	{ disasterId, organization, amount }
+) => {
+	const weiAmount = etherToWei(amount)
+	console.log(weiAmount)
+	// set amount as value of transaction
+	return await _contract.donate(disasterId, organization, {
+		value: weiAmount,
+	})
 }
 
 export const createDisaster = async (
@@ -38,4 +56,15 @@ export const createDisaster = async (
 		targetCollectionAmount,
 		reliefOrganizations
 	)
+}
+
+export const createOrganization = async (_contract, { name, organization }) => {
+	return await _contract.createOrganization(name, organization)
+}
+
+export const addOrganizationToDisaster = async (
+	_contract,
+	{ disasterId, organization }
+) => {
+	return await _contract.addOrganizationToDisaster(disasterId, organization)
 }
