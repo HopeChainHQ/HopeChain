@@ -1,30 +1,18 @@
 import React from "react"
-import ReactDOM from "react-dom"
-// import { Dapp } from "./components/TokenTransfer/Dapp"
-import Disaster from "./components/Disaster"
-import Organizations from "./components/Organizations"
-import Admin from "./components/Admin"
-import Layout from "./components/Layout"
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-
+import ReactDOM from "react-dom/client"
 import "./index.css"
-// import "bootstrap/dist/css/bootstrap.css";
+import App from "./App"
+import { BrowserRouter } from "react-router-dom"
+import reportWebVitals from "./reportWebVitals"
 
-// This is the entry point of your application, but it just renders the Dapp
-// react component. All of the logic is contained in it.
-
-ReactDOM.render(
-	<React.StrictMode>
-		<Router>
-			<Layout>
-				<Routes>
-					<Route path='/' element={<Disaster />} />
-					<Route path='/disaster/:id' element={<Organizations />} />
-					<Route path='/admin' element={<Admin />} />
-				</Routes>
-			</Layout>
-		</Router>
-	</React.StrictMode>,
-	document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>
 )
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()
