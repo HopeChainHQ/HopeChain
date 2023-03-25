@@ -1,5 +1,7 @@
 package com.devwobcis.hopechain.ui.screens
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -28,12 +30,19 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.devwobcis.hopechain.R
+import com.devwobcis.hopechain.ui.components.ProgressDialog
 import com.devwobcis.hopechain.ui.theme.DarkColors
 import com.devwobcis.hopechain.ui.theme.HopeChainTheme
 import com.devwobcis.hopechain.ui.theme.LightColors
 import com.devwobcis.hopechain.ui.theme.SetNavBarsTheme
 import com.squareup.picasso3.Picasso
 import com.squareup.picasso3.compose.rememberPainter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,12 +52,58 @@ fun ReportEventScreen(onNavigateSubmit: () -> Unit) {
     val picasso = remember { mutableStateOf(Picasso.Builder(context).build()) }
 
     val colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors
+
     var postMsg by remember { mutableStateOf("") }
+    var showDialog by remember { mutableStateOf(false) }
+    var imageCid by remember { mutableStateOf("--") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
+
+    if (showDialog) {
+        ProgressDialog(progressMsg = "IPFS: Uploading")
+    }
 
     val imageCropLauncher = rememberLauncherForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
             imageUri = result.uriContent
+
+            CoroutineScope(Dispatchers.IO).launch {
+                showDialog = true
+
+                var fos: FileOutputStream? = null
+                val file = File(context.filesDir, "${System.currentTimeMillis()}.png")
+                try {
+                    val ins = context.contentResolver.openInputStream(imageUri!!)
+                    val bitmap = BitmapFactory.decodeStream(ins)
+                    ins?.close()
+
+                    fos = FileOutputStream(file)
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                    bitmap.recycle()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    try {
+                        fos?.close()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+//                val ipfsClient = IPFS(MultiAddress("/dnsaddr/2NUjQGe04I8KMlEzpbbpGS1TFeW:07a3b4cb9ab3e7b40ae50ea0e1ccb587@filecoin.infura.io/tcp/5001/https"))
+//                val ipfsFile = NamedStreamable.FileWrapper(file)
+//
+//                var idx = 0
+//                ipfsClient.add(ipfsFile).forEach { node ->
+//                    Log.d("TAG", "ReportEventScreen: [$idx]: hash: ${node.hash.toBase58()}")
+//                    idx++
+//                }
+
+//                val upload = InfuraIPFS().add.file(file)
+//                Log.d("TAG", "ReportEventScreen: hash = ${upload.Hash}, name: ${upload.Name}")
+                delay(2000)
+                imageCid = ""
+                showDialog = false
+            }
         }
     }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -96,7 +151,13 @@ fun ReportEventScreen(onNavigateSubmit: () -> Unit) {
                         contentScale = ContentScale.Crop
                     )
 
-                    Spacer(modifier = Modifier.padding(16.dp))
+                    Text(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .align(Alignment.CenterHorizontally),
+                        text = imageCid.ifEmpty { "QmX9Xv7GLx3XmiEomeGfc1EBj2Z5Fr2atzsAhYuFLzQb5c" },
+                        fontSize = 12.sp
+                    )
 
                     OutlinedTextField(
                         modifier = Modifier
