@@ -230,6 +230,10 @@ contract DisasterDonate {
         return emergencyReliefFund;
     }
 
+    function getDonorName(address donor) public view returns (string memory) {
+        return users[donor].username;
+    }
+
     // function registerUser(bytes32 _username, bytes32 _password) public {
     //     require(!users[msg.sender].isRegistered, "User already registered");
     //     users[msg.sender].username = _username;
