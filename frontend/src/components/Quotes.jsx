@@ -7,7 +7,7 @@ const Quotes = () => {
       <Carousel
         indicators={false}
         slideInterval={15000}
-        className="px-24 my-8 border-none h-32"
+        className="px-24 my-8 border-none h-28"
         leftControl=""
         rightControl=""
       >
