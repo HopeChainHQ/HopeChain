@@ -3,8 +3,6 @@ import { useEffect, useState, Fragment } from "react"
 import DisasterArtifact from "../../contracts/DisasterDonate.json"
 import contractAddress from "../../contracts/contract-address.json"
 
-import "./Admin.css"
-
 import {
 	createDisaster,
 	createOrganization,
@@ -196,157 +194,330 @@ const Admin = () => {
 
 	return (
 		<Fragment>
-			<main>Admin - {selectedAddress}</main>
-			<h1>Add Disaster</h1>
-			<form>
-				<label>
-					Disaster Type:
-					{/* 1. Earthquake
-                    2. Tsunami
-                    3. Hurricane/Cyclone
-                    4. Wildfire
-                    5. Flood
-                    6. Drought
-                    7. Oil Spillage
-                    8. Human Caused 
-                    9. Infectious Disease Outbreak */}
-					<select
-						value={disasterType}
-						onChange={(e) => setDisasterType(e.target.value)}>
-						<option value='earthquake'>Earthquake</option>
-						<option value='tsunami'>Tsunami</option>
-						<option value='hurricane'>Hurricane/Cyclone</option>
-						<option value='wildfire'>Wildfire</option>
-						<option value='flood'>Flood</option>
-						<option value='drought'>Drought</option>
-						<option value='oilSpillage'>Oil Spillage</option>
-						<option value='humanCaused'>Human Caused</option>
-						<option value='infectiousDiseaseOutbreak'>
-							Infectious Disease Outbreak
-						</option>
-					</select>
-				</label>
-				<label>
-					Name:
-					<input
-						type='text'
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-				</label>
-				<label>
-					Severity:
-					<input
-						type='text'
-						value={severity}
-						onChange={(e) => setSeverity(e.target.value)}
-					/>
-				</label>
-				<label>
-					Description:
-					<input
-						type='text'
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-					/>
-				</label>
-				<label>
-					Affected Areas:
-					<input
-						type='text'
-						value={affectedAreas}
-						onChange={(e) => setAffectedAreas(e.target.value)}
-					/>
-				</label>
-				<label>
-					Affected People Count:
-					<input
-						type='number'
-						value={affectedPeopleCount}
-						onChange={(e) => setAffectedPeopleCount(e.target.value)}
-					/>
-				</label>
-				<label>
-					Target Collection Amount:
-					<input
-						type='number'
-						value={targetCollectionAmount}
-						onChange={(e) => setTargetCollectionAmount(e.target.value)}
-					/>
-				</label>
-				<label>
-					Relief Organizations:
-					<input
-						type='text'
-						value={reliefOrganizations}
-						onChange={(e) => setReliefOrganizations(e.target.value)}
-					/>
-				</label>
-				<input type='button' value='Add Disaster' onClick={handleAddDisaster} />
+			<main className='text-center text-3xl'>Admin - {selectedAddress}</main>
+			<form className='w-3/4 mx-auto mt-5'>
+				<div className='space-y-12 sm:space-y-16'>
+					<div>
+						<h2 className='text-xl font-semibold leading-7 text-gray-900'>
+							Add Disaster
+						</h2>
+
+						<div className='mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0'>
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Name
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={name}
+										onChange={(e) => setName(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Severity
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={severity}
+										onChange={(e) => setSeverity(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Description
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={description}
+										onChange={(e) => setDescription(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Affected Areas
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={affectedAreas}
+										onChange={(e) => setAffectedAreas(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='country'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Disaster Type
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<select
+										id='country'
+										name='country'
+										value={disasterType}
+										onChange={(e) => setDisasterType(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'>
+										<option value='earthquake'>Earthquake</option>
+										<option value='tsunami'>Tsunami</option>
+										<option value='hurricane'>Hurricane/Cyclone</option>
+										<option value='wildfire'>Wildfire</option>
+										<option value='flood'>Flood</option>
+										<option value='drought'>Drought</option>
+										<option value='oilSpillage'>Oil Spillage</option>
+										<option value='humanCaused'>Human Caused</option>
+										<option value='infectiousDiseaseOutbreak'>
+											Infectious Disease Outbreak
+										</option>
+									</select>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Affected People Count
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='number'
+										name='first-name'
+										id='first-name'
+										value={affectedPeopleCount}
+										onChange={(e) => setAffectedPeopleCount(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Target Collection Amount
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='number'
+										name='first-name'
+										id='first-name'
+										value={targetCollectionAmount}
+										onChange={(e) => setTargetCollectionAmount(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Relief Organizations
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={reliefOrganizations}
+										onChange={(e) => setReliefOrganizations(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className='mt-6 flex items-center justify-end gap-x-6'>
+					<button
+						type='submit'
+						onClick={handleAddDisaster}
+						className='inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+						Add Disaster
+					</button>
+				</div>
 			</form>
-			<h1>Add Organization</h1>
-			<form>
-				<label>
-					Organization Name:
-					<input
-						type='text'
-						value={organizationName}
-						onChange={(e) => setOrganizationName(e.target.value)}
-					/>
-				</label>
-				<label>
-					Organization Address:
-					<input
-						type='text'
-						value={organizationAddress}
-						onChange={(e) => setOrganizationAddress(e.target.value)}
-					/>
-				</label>
-				<input
-					type='button'
-					value='Add Organization'
-					onClick={handleAddOrganization}
-				/>
+			<form className='w-3/4 mx-auto mt-5'>
+				<div className='space-y-12 sm:space-y-16'>
+					<div>
+						<h2 className='text-xl font-semibold leading-7 text-gray-900'>
+							Add Organization
+						</h2>
+
+						<div className='mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0'>
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Organization Name
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={organizationName}
+										onChange={(e) => setOrganizationName(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Organization Address
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={organizationAddress}
+										onChange={(e) => setOrganizationAddress(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className='mt-6 flex items-center justify-end gap-x-6'>
+					<button
+						type='submit'
+						onClick={handleAddOrganization}
+						className='inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+						Add Organization
+					</button>
+				</div>
 			</form>
-			<h1>Add Organization to Disaster</h1>
-			<form>
-				<label>
-					Disaster ID:
-					<input
-						type='number'
-						value={disasterId}
-						onChange={(e) => setDisasterId(e.target.value)}
-					/>
-				</label>
-				<label>
-					Organization Address:
-					<input
-						type='text'
-						value={organizationAddress}
-						onChange={(e) => setOrganizationAddress(e.target.value)}
-					/>
-				</label>
-				<input
-					type='button'
-					value='Add Organization to Disaster'
-					onClick={handleAddOrganizationToDisaster}
-				/>
+			<form className='w-3/4 mx-auto mt-5'>
+				<div className='space-y-12 sm:space-y-16'>
+					<div>
+						<h2 className='text-xl font-semibold leading-7 text-gray-900'>
+							Add Organization to Disaster
+						</h2>
+
+						<div className='mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0'>
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Disaster Id
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={disasterId}
+										onChange={(e) => setDisasterId(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Organization Address
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={organizationAddress}
+										onChange={(e) => setOrganizationAddress(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className='mt-6 flex items-center justify-end gap-x-6'>
+					<button
+						type='submit'
+						onClick={handleAddOrganizationToDisaster}
+						className='inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+						Add Organization to Disaster
+					</button>
+				</div>
 			</form>
-			<h1>Delete Disaster</h1>
-			<form>
-				<label>
-					Disaster ID:
-					<input
-						type='number'
-						value={disasterId}
-						onChange={(e) => setDisasterId(e.target.value)}
-					/>
-				</label>
-				<input
-					type='button'
-					value='Delete Disaster'
-					onClick={handleDeleteDisaster}
-				/>
+			<form className='w-3/4 mx-auto mt-5'>
+				<div className='space-y-12 sm:space-y-16'>
+					<div>
+						<h2 className='text-xl font-semibold leading-7 text-gray-900'>
+							Delete Disaster
+						</h2>
+
+						<div className='mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0'>
+							<div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6'>
+								<label
+									htmlFor='first-name'
+									className='block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5'>
+									Disaster Id
+								</label>
+								<div className='mt-2 sm:col-span-2 sm:mt-0'>
+									<input
+										type='text'
+										name='first-name'
+										id='first-name'
+										value={disasterId}
+										onChange={(e) => setDisasterId(e.target.value)}
+										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className='mt-6 flex items-center justify-end gap-x-6'>
+					<button
+						type='submit'
+						onClick={deleteDisaster}
+						className='inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+						Delete Disaster
+					</button>
+				</div>
 			</form>
 		</Fragment>
 	)

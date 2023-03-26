@@ -553,10 +553,10 @@ const DisasterInfo = () => {
 						<Timeline.Item>
 							<Timeline.Point icon={HiCalendar} />
 							<Timeline.Content>
-								<Timeline.Time>28 February 2022</Timeline.Time>
+								<Timeline.Time>6 February 2023</Timeline.Time>
 								<Timeline.Title>The Unfortunate Disaster</Timeline.Title>
 								<Timeline.Body>
-									The unfortunate disaster that happened in the year 2022, at
+									The unfortunate disaster that happened in the year 2023, at
 									delhi. Atleast 500 people died in the disaster. The disaster
 									was caused by the earthquake.
 								</Timeline.Body>
@@ -569,7 +569,7 @@ const DisasterInfo = () => {
 						<Timeline.Item>
 							<Timeline.Point icon={HiCalendar} />
 							<Timeline.Content>
-								<Timeline.Time>1 March 2022</Timeline.Time>
+								<Timeline.Time>1 March 2023</Timeline.Time>
 								<Timeline.Title>50% target fund was collected</Timeline.Title>
 								<Timeline.Body>
 									Through contributions from the people of world, we were able
@@ -581,7 +581,7 @@ const DisasterInfo = () => {
 						<Timeline.Item>
 							<Timeline.Point icon={HiCalendar} />
 							<Timeline.Content>
-								<Timeline.Time>5 March 2022</Timeline.Time>
+								<Timeline.Time>5 March 2023</Timeline.Time>
 								<Timeline.Title>
 									Rebuilding started in the affected areas
 								</Timeline.Title>
@@ -595,7 +595,7 @@ const DisasterInfo = () => {
 						<Timeline.Item>
 							<Timeline.Point icon={HiCalendar} />
 							<Timeline.Content>
-								<Timeline.Time>6 March 2022</Timeline.Time>
+								<Timeline.Time>6 March 2023</Timeline.Time>
 								<Timeline.Title>80% target fund was collected</Timeline.Title>
 								<Timeline.Body>
 									Through contributions from the people of world, we were able
