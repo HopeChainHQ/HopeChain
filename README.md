@@ -18,10 +18,10 @@ We also reward our donors and with each donation they make, they get some HopeCo
 
 
 ## Demo Video Link:
-  <a href="https://youtu.be/dQw4w9WgXcQ">https://youtu.be/dQw4w9WgXcQ</a>
+  <a href="https://youtu.be/QigEkrAj3bk">https://youtu.be/QigEkrAj3bk</a>
 
 ## Presentation Link:
-  <a href="https://cutt.ly/Hack36_23_ppt"> PPT link here </a>
+  <a href="https://drive.google.com/file/d/1CMaTNLnf7uZ1aoptCdHAsBKHU3d2KHZe/view"> PPT link here </a>
 
 
 ## Technology Stack:
